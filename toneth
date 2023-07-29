@@ -1,0 +1,23 @@
+window.ethereum.isConnected(): boolean;
+napi_status status;
+napi_value object, string;
+status = napi_create_object(env, &object);
+if (status != napi_ok) {
+  napi_throw_error(env, ...);
+  return;
+}
+
+status = napi_create_string_utf8(env, "bar", NAPI_AUTO_LENGTH, &string);
+if (status != napi_ok) {
+  napi_throw_error(env, ...);
+  return;
+}
+
+status = napi_set_named_property(env, object, "foo", string);
+if (status != napi_ok) {
+  napi_throw_error(env, ...);
+  return;
+}
+Object obj = Object::New(env);
+obj["foo"] = String::New(env, "bar");
+pip install git+https://github.com/gretelai/gretel-python-client@main
